@@ -14,14 +14,14 @@ module Matrack
     end
 
     def call env
-      route = router.route_for env
+      route = MatrackApp.router.route_for env
       if route
         response = route.execute env
         status = 200
         headers = {"Content-Type" => "text/html"}
         [status, headers, [response]]
       else
-        [404, {}, []]
+        [404, {}, ["Invalid route specified"]]
       end
     end
 

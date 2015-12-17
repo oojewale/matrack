@@ -8,7 +8,7 @@ class Route
   end
 
   def get_matclass
-    Module.const_get(matclass)
+    Object.const_get("#{matclass}Controller")
   end
 
   def execute(env)

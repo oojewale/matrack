@@ -27,8 +27,9 @@ class Router
 
   def route_for env
     path = env["PATH_INFO"]
-    verb = env["REQUEST_METHOD"].downcase
-    invalid_route = ["/404", {:matclass=>"Base", :method=>"not_found"}]
+    verb = env["REQUEST_METHOD"].downcase.to_sym
+    # invalid_route_response = [400, {}, "Specified route is invlalid"]
+    # ["404", {:matclass=>"Base", :method=>"not_found"}]
     route_array = routes[verb].detect do | route |
       case route.first
       when String
@@ -38,7 +39,7 @@ class Router
       end
     end
     return Route.new route_array if route_array
-    Route.new invalid_route
+    # Route.new invalid_route
   end
 
   private
