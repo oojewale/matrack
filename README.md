@@ -34,7 +34,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/matrack.
+Bug reports and pull requests are welcome on GitHub at https://github.com/andela-oojewale/matrack.
+
+* Fork it ( https://github.com/andela-oojewale/matrack/fork)
+* Create your feature branch (git checkout -b my-new-feature)
+* Commit your changes (git commit -am 'Add some feature')
+* Push to the branch (git push origin my-new-feature)
+* Create a new Pull Request
 
 
 ## License
