@@ -26,20 +26,10 @@ class Router
   end
 
   def route_for env
-    path = env["PATH_INFO"]
+    path = env["PATH_INFO"] == "/" ? "/" : env["PATH_INFO"].sub("/", "")
     verb = env["REQUEST_METHOD"].downcase.to_sym
-    # invalid_route_response = [400, {}, "Specified route is invlalid"]
-    # ["404", {:matclass=>"Base", :method=>"not_found"}]
-    route_array = routes[verb].detect do | route |
-      case route.first
-      when String
-        path == route.first
-      when Regexp
-        path =~ route.first
-      end
-    end
-    return Route.new route_array if route_array
-    # Route.new invalid_route
+    route_array = routes[verb].detect { |route| route.first == path }
+    Route.new route_array if route_array
   end
 
   private
