@@ -1,5 +1,5 @@
 module Matrack
-  class BaseModel
+  class BaseModel < DataManger
     def self.all
 
     end
@@ -40,8 +40,9 @@ module Matrack
 
     end
 
-    def self.create
-
+    def self.create(table_name, field_hash)
+        conn.execute "INSERT INTO #{table_name} (#{field_hash.keys.join ","})
+        VALUES (#{field_hash.values.join ","});"
     end
 
     def self.joined_to
