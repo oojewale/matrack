@@ -1,5 +1,10 @@
 module Matrack
   class BaseModel < DataManger
+    attr_reader :table_name
+    def initialize
+      @table_name = self.class.to_snake_case
+    end
+
     def self.all
 
     end
@@ -36,13 +41,13 @@ module Matrack
 
     end
 
-    def self.save
-
+    def self.count
+      conn.execute "SELECT COUNT(*) FROM #{table_name}"
     end
 
-    def self.create(table_name, field_hash)
-        conn.execute "INSERT INTO #{table_name} (#{field_hash.keys.join ","})
-        VALUES (#{field_hash.values.join ","});"
+    def self.create(field_hash)
+      conn.execute "INSERT INTO #{table_name} (#{field_hash.keys.join ","})
+      VALUES (#{field_hash.values.join ","});"
     end
 
     def self.joined_to

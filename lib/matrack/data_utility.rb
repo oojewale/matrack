@@ -4,8 +4,9 @@ class DataUtility
   end
 
   def self.timer_checker(field_hash)
+    time_arr = []
     field_hash.each_pair { |k,v| time_arr << k if v == "time" }
-    if time_arr
+    unless time_arr.empty?
       time_arr.all? { |t| t =~ /[\d]{2}:[\d]{2}:[\d]{2}/ } ? true : false
     else
       true
@@ -14,8 +15,9 @@ class DataUtility
   end
 
   def self.date_checker(field_hash)
+    date_arr = []
     field_hash.each_pair { |k,v| date_arr << k if v == "date" }
-    if date_arr
+    unless date_arr.empty?
       date_arr.all? { |d| d =~ /[\d]{4}-[\d]{2}-[\d]{2}/ } ? true : false
     else
       true

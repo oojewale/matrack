@@ -3,7 +3,7 @@ module Matrack
   class DataManger
     attr_reader :conn
     def self.connection
-      @conn = SQLite3::Database.new "#{self.class}.db"
+      @conn = SQLite3::Database.new "#{self.to_s.downcase.split("::").first}.db"
     end
 
     def allowed_field_types
