@@ -1,10 +1,4 @@
-require "matrack/version"
-require "matrack/utility"
-require "matrack/dependencies"
-require "matrack/base_model"
-require "matrack/base_controller"
-require "matrack/route"
-require "matrack/router"
+require_relative "resources"
 
 module Matrack
   class Application

@@ -9,4 +9,10 @@ class ::String
     return self if self !~ /_/ && self =~ /[A-Z]+.*/
     split("_").map(&:capitalize).join
   end
+
+  def to_b
+    return true if !self.nil? && (self == true || downcase == "true")
+    return false if self.nil? || downcase == "false" || self == false
+    false
+  end
 end
