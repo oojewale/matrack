@@ -1,7 +1,7 @@
 class Route
-  attr_accessor :matclass, :path, :action
+  attr_accessor :matclass, :action
 
-  def initialize route_array
+  def initialize(route_array)
     @matclass = route_array.last[:matclass]
     @path = route_array.first
     @action = route_array.last[:method].to_sym

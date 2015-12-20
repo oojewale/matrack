@@ -1,5 +1,10 @@
 AllCops:
   Exclude:
+    - "spec/spec_helper.rb"
+    - "Gemfile"
+    - "Gemfile.lock"
+    - "Rakefile"
+    - "matrack.gemspec"
 
   UseCache: false
 Style/CollectionMethods:
