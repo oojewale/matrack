@@ -1,11 +1,8 @@
 module Matrack
   class BaseModel < DataManger
+    attr_reader :create_query_string
 
-    @@create_query_string = ""
-
-    def initialize
-      @attr = attr
-    end
+    @@query_string = ""
 
     class << self
       def table_name
@@ -13,65 +10,85 @@ module Matrack
       end
 
       def create_table
-        create_table_feilds(table_name, @@create_query_string)
+        query_string = @@query_string.sub(/,[\s]$/,"")
+        create_table_feilds(table_name,query_string)
+        @@query_string = ""
       end
 
       def property(name, type = "str", primary = {}, nullable = {} )
         field_hash = { name => type }
         if verify_col_type(field_hash) == true
           db_str = DataUtility.type_mapper(field_hash)
-          @@create_query_string += query_builder(db_str.keys, db_str.values,                                    primary, nullable)
-          require "pry"; binding.pry
+          @@query_string += query_builder(db_str.keys, db_str.values,                                    primary, nullable)
+          @@query_string += ", " unless @@query_string == ""
+          get_and_set_property(name)
         else
           puts db_error(verify_col_type(field_hash))
+          exit
         end
       end
 
+      def get_and_set_property(name)
+        # instance_variable_set("@#{name},#{value}")
+
+        # define_method(name) do
+        #   a = instance_variable_get("@#{name}")
+        # end
+      end
+
       def all
-        conn.execute "SELECT * FROM #{table_name}"
+        db_conn.execute "SELECT * FROM #{table_name}"
       end
 
       def find(id)
-        conn.execute "SELECT * FROM #{table_name} WHERE (id = #{id})"
+        row = db_conn.execute "SELECT * FROM #{table_name} WHERE (#{self}_id = #{id})"
+        row.hash_getter
+      end
+
+      def last
+        offset = count.values.first - 1
+        row = db_conn.execute "SELECT * FROM #{table_name} LIMIT(1) OFFSET(#{offset})"
+        row.hash_getter
+      end
+
+      def first
+        row = db_conn.execute "SELECT * FROM #{table_name} LIMIT(1)"
+        row.hash_getter
       end
 
       def find_by(key, val)
-          # Pass hash into find where the key is the attr.
-          conn.execute "SELECT * FROM #{table_name} WHERE (#{key} = #{val}) LIMIT 1"
+        # Pass hash into find where the key is the attr.
+        row = db_conn.execute "SELECT * FROM #{table_name} WHERE (#{key} = #{val}) LIMIT 1"
+        row.hash_getter
       end
 
       def where(hash)
           hash.map{ |k,v| "#{k} = " "#{v}" }.join(" AND ")
       end
 
-      def limit()
-
-      end
-
-      def offset()
-
-      end
-
-      def join()
-
-      end
-
       def select(*args)
         fields = args.join(", ")
-        conn.execute "SELECT #{fields} FROM #{table_name}"
+        db_conn.execute "SELECT #{fields} FROM #{table_name}"
       end
 
-      def unique()
+      def destroy(id)
+        db_conn.execute "DELETE FROM #{table_name} WHERE (#{self}_id = #{id})"
+      end
 
+      def destroy_all
+        db_conn.execute "DELETE FROM #{table_name}"
       end
 
       def count
-        conn.execute "SELECT COUNT(*) FROM #{table_name}"
+        row = db_conn.execute "SELECT COUNT(*) FROM #{table_name}"
+        row.hash_getter
       end
 
       def create(field_hash)
-        conn.execute "INSERT INTO #{table_name} (#{field_hash.keys.join ","})
-        VALUES (#{field_hash.values.join ","});"
+        attributes = "#{field_hash.keys}".gsub(/:/, "").gsub(/\[|\]/,"")
+        values = "#{field_hash.values}".gsub(/\[|\]/,"").gsub(/\"/,"'")
+        db_conn.execute "INSERT INTO #{table_name} (#{attributes}) VALUES (#{
+          values});"
       end
     end
     private

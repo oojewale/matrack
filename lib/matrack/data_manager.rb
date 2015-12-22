@@ -3,17 +3,13 @@ require "fileutils"
 
 module Matrack
   class DataManger
-    # attr_reader :app_name
 
     class << self
 
-      def connection
-        @@app_name = self.to_s.downcase.split("::").first
-        SQLite3::Database.new "db/#{@@app_name}.sqlite3"
-      end
-
       def db_conn
-        SQLite3::Database.open "db/#{@@app_name}.sqlite3"
+        db = SQLite3::Database.new "db/app.sqlite3"
+        db.results_as_hash = true
+        db
       end
 
       def db_error(message)
@@ -37,12 +33,10 @@ module Matrack
 
       def create_table_feilds(table_name, qry_str)
         begin
-          db_conn.transaction
           db_conn.execute "CREATE TABLE IF NOT EXISTS #{table_name} (#{qry_str});"
-          db_conn.commit
         rescue SQLite3::Exception => exp
           puts self.db_error(exp)
-          db_conn.rollback
+          exit
         end
       end
 
@@ -55,6 +49,7 @@ module Matrack
         end
         "Invalid column type(s) specified"
       end
+
     end
 
   end

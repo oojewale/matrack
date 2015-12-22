@@ -20,3 +20,9 @@ class ::String
     split.map!(&:capitalize).join(" ")
   end
 end
+
+class ::Array
+  def hash_getter
+    first.select{|k| k.is_a? String}
+  end
+end
