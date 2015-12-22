@@ -1,17 +1,18 @@
 module Matrack
-  class BaseModel < DataManger
-    attr_reader :create_query_string
+  class BaseModel < Queries
+
+    def initialize(hash = {})
+      hash.each_pair { |k,v| send("#{k}=", v) }
+      self
+    end
 
     @@query_string = ""
 
     class << self
-      def table_name
-        self.to_s.to_snake_case + "s"
-      end
 
       def create_table
         query_string = @@query_string.sub(/,[\s]$/,"")
-        create_table_feilds(table_name,query_string)
+        create_table_fields(table_name,query_string)
         @@query_string = ""
       end
 
@@ -29,60 +30,15 @@ module Matrack
       end
 
       def get_and_set_property(name)
-        # instance_variable_set("@#{name},#{value}")
-
-        # define_method(name) do
-        #   a = instance_variable_get("@#{name}")
-        # end
+        define_method(name) do
+         instance_variable_get("@#{name}")
+        end
+        define_method("#{name}=") do |value|
+          instance_variable_set("@#{name}", "#{value}")
+        end
       end
 
-      def all
-        db_conn.execute "SELECT * FROM #{table_name}"
-      end
 
-      def find(id)
-        row = db_conn.execute "SELECT * FROM #{table_name} WHERE (#{self}_id = #{id})"
-        row.hash_getter
-      end
-
-      def last
-        offset = count.values.first - 1
-        row = db_conn.execute "SELECT * FROM #{table_name} LIMIT(1) OFFSET(#{offset})"
-        row.hash_getter
-      end
-
-      def first
-        row = db_conn.execute "SELECT * FROM #{table_name} LIMIT(1)"
-        row.hash_getter
-      end
-
-      def find_by(key, val)
-        # Pass hash into find where the key is the attr.
-        row = db_conn.execute "SELECT * FROM #{table_name} WHERE (#{key} = #{val}) LIMIT 1"
-        row.hash_getter
-      end
-
-      def where(hash)
-          hash.map{ |k,v| "#{k} = " "#{v}" }.join(" AND ")
-      end
-
-      def select(*args)
-        fields = args.join(", ")
-        db_conn.execute "SELECT #{fields} FROM #{table_name}"
-      end
-
-      def destroy(id)
-        db_conn.execute "DELETE FROM #{table_name} WHERE (#{self}_id = #{id})"
-      end
-
-      def destroy_all
-        db_conn.execute "DELETE FROM #{table_name}"
-      end
-
-      def count
-        row = db_conn.execute "SELECT COUNT(*) FROM #{table_name}"
-        row.hash_getter
-      end
 
       def create(field_hash)
         attributes = "#{field_hash.keys}".gsub(/:/, "").gsub(/\[|\]/,"")

@@ -31,7 +31,7 @@ module Matrack
         ["int", "str", "time", "date"]
       end
 
-      def create_table_feilds(table_name, qry_str)
+      def create_table_fields(table_name, qry_str)
         begin
           db_conn.execute "CREATE TABLE IF NOT EXISTS #{table_name} (#{qry_str});"
         rescue SQLite3::Exception => exp
