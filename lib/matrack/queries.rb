@@ -31,7 +31,6 @@ module Matrack
       end
 
       def limit(num)
-        offset = count.values.first - 1
         execute "SELECT * FROM #{table_name} LIMIT(#{num})"
       end
 
@@ -56,6 +55,7 @@ module Matrack
         row.hash_getter.values.first
       end
 
+      # .update(1, title: "updated task again", done: "yes")
       def update(id, hash)
         fields = hash.map{|k,v| "'#{k}'" " = "  "'#{v}'"}.join(", ")
         qry = "UPDATE #{table_name} SET #{fields} WHERE (#{uniq_id} = #{id})"

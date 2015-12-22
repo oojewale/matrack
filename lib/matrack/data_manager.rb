@@ -1,5 +1,4 @@
 require "sqlite3"
-require "fileutils"
 
 module Matrack
   class DataManger
@@ -16,14 +15,14 @@ module Matrack
         DataUtility.db_error(message)
       end
 
-      def query_builder(name, type, primary, nullable)
+      def query_builder(name, type, desc)
         name = name.join
         type = type.join
-        primary_key = "PRIMARY KEY" if primary.values.join.to_b == true
-        primary_key += " AUTOINCREMENT" if primary_key == true &&
+        primary_key = "PRIMARY KEY" if desc[:primary] == true
+        primary_key += " AUTOINCREMENT" if primary_key &&
                                            type == "INTEGER"
         primary_key = primary_key ? primary_key : ""
-        null_value = nullable.values.join.to_b == true ? "": "NOT NULL"
+        null_value = desc[:nullable] == false ? "NOT NULL": "NULL"
         "#{name} #{type} #{primary_key} #{null_value}"
       end
 
@@ -41,16 +40,13 @@ module Matrack
       end
 
       def verify_col_type(field_hash)
-        if field_hash.values.all? { |val| allowed_field_types.include? val.to_s }
-          valid_time = DataUtility.timer_checker(field_hash)
-          valid_date = DataUtility.date_checker(field_hash)
-          return true if valid_time && valid_date
-          return "Invalid date or date format. Check documentation."
-        end
+        return true if valid_col_types?(field_hash)
         "Invalid column type(s) specified"
       end
 
+      def valid_col_types?(field_hash)
+        field_hash.values.all? { |val| allowed_field_types.include? val.to_s }
+      end
     end
-
   end
 end

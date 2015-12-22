@@ -16,11 +16,11 @@ module Matrack
         @@query_string = ""
       end
 
-      def property(name, type = "str", primary = {}, nullable = {} )
+      def property(name, type = "str", desc = {} )
         field_hash = { name => type }
         if verify_col_type(field_hash) == true
           db_str = DataUtility.type_mapper(field_hash)
-          @@query_string += query_builder(db_str.keys, db_str.values,                                    primary, nullable)
+          @@query_string += query_builder(db_str.keys, db_str.values,                              desc)
           @@query_string += ", " unless @@query_string == ""
           get_and_set_property(name)
         else
@@ -38,8 +38,6 @@ module Matrack
         end
       end
 
-
-
       def create(field_hash)
         attributes = "#{field_hash.keys}".gsub(/:/, "").gsub(/\[|\]/,"")
         values = "#{field_hash.values}".gsub(/\[|\]/,"").gsub(/\"/,"'")
@@ -47,8 +45,5 @@ module Matrack
           values});"
       end
     end
-    private
-
-
   end
 end
