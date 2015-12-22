@@ -1,9 +1,13 @@
 require "sqlite3"
+require "fileutils"
+
 module Matrack
   class DataManger
     attr_reader :conn
+
     def self.connection
-      @conn = SQLite3::Database.new "#{self.to_s.downcase.split("::").first}.db"
+      app_name = self.to_s.downcase.split("::").first
+      @conn ||= SQLite3::Database.new "db/#{app_name}.sqlite3"
     end
 
     def allowed_field_types
@@ -22,10 +26,10 @@ module Matrack
         begin
           conn.execute "CREATE TABLE IF NOT EXISTS #{table_name} (#{db_str});"
         rescue SQLite3::Exception => exp
-          "This error occured: #{exp}"
+          puts self.db_error(exp)
         end
       else
-        verify_col_type(field_hash)
+        puts self.db_error(verify_col_type(field_hash))
       end
     end
 
@@ -39,12 +43,8 @@ module Matrack
       "Invalid column type(s) specified"
     end
 
-    # def self.generate_schema
-    #   @schema = {}
-    #   self.table_info(table_name) do |row|
-    #     @schema[row["name"]] = row["type"]
-    #   end
-    # end
-
+    def self.db_error(message)
+      DataUtility.db_error(message)
+    end
   end
 end

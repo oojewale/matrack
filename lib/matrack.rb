@@ -21,7 +21,7 @@ module Matrack
     def response_handler(response, route, env)
       status = 200
       headers = { "Content-Type" => "text/html" }
-      controller = route.get_matclass.new(env)
+      controller = route.matclass.new(env)
       return [status, headers, [response]] if response.is_a? String
       controller.send(route.action)
       response = controller.render(route.action)

@@ -15,4 +15,8 @@ class ::String
     return false if self.nil? || downcase == "false" || self == false
     false
   end
+
+  def titleize
+    split.map!(&:capitalize).join(" ")
+  end
 end

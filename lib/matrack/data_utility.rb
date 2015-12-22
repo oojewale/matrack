@@ -43,4 +43,12 @@ class DataUtility
     end
     db_str
   end
+
+  def self.db_error(message)
+    <<-EOS
+          *************************************************
+              DB ERROR - #{message.to_s.titleize}
+          *************************************************
+    EOS
+  end
 end

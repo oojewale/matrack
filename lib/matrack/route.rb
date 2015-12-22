@@ -1,17 +1,14 @@
 class Route
-  attr_accessor :matclass, :action
+  attr_reader :matclass, :action
 
   def initialize(route_array)
-    @matclass = route_array.last[:matclass]
+    str_matclass = route_array.last[:matclass].to_camel_case
+    @matclass = Object.const_get(str_matclass+"Controller")
     @path = route_array.first
     @action = route_array.last[:method].to_sym
   end
 
-  def get_matclass
-    Object.const_get("#{matclass}Controller")
-  end
-
   def execute(env)
-    get_matclass.new(env).send(action)
+    matclass.new(env).send(action)
   end
 end

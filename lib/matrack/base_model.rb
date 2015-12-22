@@ -1,24 +1,29 @@
 module Matrack
   class BaseModel < DataManger
-    attr_reader :table_name
+
     def initialize
-      @table_name = self.class.to_snake_case
+      @table_name = self.class.to_snake_case + "s"
+    end
+
+    def create_table
+      create_table(table_name, field_hash)
     end
 
     def self.all
-
+      conn.execute "SELECT * FROM #{table_name}"
     end
 
-    def self.find()
-
+    def self.find(id)
+      conn.execute "SELECT * FROM #{table_name} WHERE (id = #{id})"
     end
 
-    def self.find_by()
-
+    def self.find_by(key, val)
+        # Pass hash into find where the key is the attr.
+        conn.execute "SELECT * FROM #{table_name} WHERE (#{key} = #{val}) LIMIT 1"
     end
 
-    def self.where()
-
+    def self.where(hash)
+        hash.map{ |k,v| "#{k} = " "#{v}" }.join(" AND ")
     end
 
     def self.limit()
@@ -33,8 +38,9 @@ module Matrack
 
     end
 
-    def self.select()
-
+    def self.select(*args)
+      fields = args.join(", ")
+      conn.execute "SELECT #{fields} FROM #{table_name}"
     end
 
     def self.unique()
@@ -57,5 +63,9 @@ module Matrack
     def self.has_many
 
     end
+
+    private
+
+    attr_reader :table_name
   end
 end
