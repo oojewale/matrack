@@ -11,7 +11,7 @@ require "simplecov"
 SimpleCov.start
 require "codeclimate-test-reporter"
 require "matrack"
-require "todo/config/application.rb"
+# require "todo/config/application.rb"
 require "rspec"
 
 SimpleCov.start do
