@@ -1,8 +1,8 @@
-require_relative "feature_helper"
+# require_relative "feature_helper"
 
-describe "get routes", type: :feature do
-  scenario "visit" do
-    visit "/"
-    expect(page).to have_title "Index"
-  end
-end
+# describe "get routes", type: :feature do
+#   scenario "visit" do
+#     visit "/"
+#     expect(page).to have_title "Index"
+#   end
+# end
