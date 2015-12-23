@@ -25,7 +25,7 @@ class Router
   end
 
   def route_for(env)
-    path = env["PATH_INFO"] == "/" ? "/" : env["PATH_INFO"]
+    path = env["PATH_INFO"]
     verb = env["REQUEST_METHOD"].downcase.to_sym
     route_array = routes[verb].detect do |route|
       route.first == path || route.first == path.sub("/", "")

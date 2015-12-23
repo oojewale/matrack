@@ -18,11 +18,12 @@ module Matrack
       def query_builder(name, type, desc)
         name = name.join
         type = type.join
-        primary_key = "PRIMARY KEY" if desc[:primary] == true
-        primary_key += " AUTOINCREMENT" if primary_key &&
+        primary_key = "PRIMARY KEY" if desc[:primary_key] == true
+        primary_key += " AUTOINCREMENT" if desc[:primary_key] == true &&
                                            type == "INTEGER"
         primary_key = primary_key ? primary_key : ""
-        null_value = desc[:nullable] == false ? "NOT NULL": "NULL"
+        null_value = desc[:nullable].nil? ? "NULL" : "NOT NULL"
+        null_value = "NOT NULL" if desc[:primary_key] == true
         "#{name} #{type} #{primary_key} #{null_value}"
       end
 

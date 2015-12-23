@@ -33,9 +33,5 @@ module Matrack
     def controller_name
       self.class.to_s.gsub(/Controller$/, "").to_snake_case
     end
-
-    def redirect_to_action(action)
-      self.send(action)
-    end
   end
 end

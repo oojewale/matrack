@@ -11,10 +11,10 @@ module Matrack
       end
 
       def execute(query)
-        q = []
+        objs = []
         rows = db_conn.execute query
-        rows.each{|row| q << self.new(row.reject!{ |k| !k.is_a? String }) }
-        q
+        rows.each{|row| objs << self.new(row.reject!{ |k| !k.is_a? String }) }
+        objs
       end
 
       def all
@@ -31,7 +31,7 @@ module Matrack
       end
 
       def limit(num)
-        execute "SELECT * FROM #{table_name} LIMIT(#{num})"
+        execute("SELECT * FROM #{table_name} LIMIT(#{num})").first
       end
 
       def first
@@ -39,7 +39,8 @@ module Matrack
       end
 
       def find_by(col, val)
-        execute("SELECT * FROM #{table_name} WHERE (#{col} = '#{val}') LIMIT 1").first
+        execute("SELECT * FROM #{table_name} WHERE (#{col} = '#{val}')
+                LIMIT 1").first
       end
 
       def destroy(id)
@@ -55,8 +56,6 @@ module Matrack
         row.hash_getter.values.first
       end
 
-      # Save
-
       # .update(1, title: "updated task again", done: "yes")
       def update(id, hash)
         fields = hash.map{|k,v| "'#{k}'" " = "  "'#{v}'"}.join(", ")
@@ -64,6 +63,16 @@ module Matrack
         return "Record updated" if db_conn.execute qry
         "Operation not successful"
       end
+    end
+
+    def save
+      hash = {}
+      instance_variables.each{ |v| hash[v.to_s] = instance_variable_get(v) }
+      attributes = hash.keys.map{ |k| k.sub("@","") }.join(", ")
+      values = "#{hash.values}".gsub(/\[|\]/,"").gsub(/\"/,"'")
+      query = "INSERT INTO #{self.class.table_name} (#{attributes})
+              VALUES (#{values});"
+      self.class.execute query
     end
   end
 end
