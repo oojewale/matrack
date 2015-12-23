@@ -1,55 +1,49 @@
 module Matrack
-  class BaseModel
-    def self.all
+  class BaseModel < Queries
 
+    def initialize(hash = {})
+      hash.each_pair { |k,v| send("#{k}=", v) }
+      self
     end
 
-    def self.find()
+    @@query_string = ""
 
-    end
+    class << self
 
-    def self.find_by()
+      def create_table
+        query_string = @@query_string.sub(/,[\s]$/,"")
+        create_table_fields(table_name,query_string)
+        @@query_string = ""
+      end
 
-    end
+      def property(name, type = "str", desc = {} )
+        field_hash = { name => type }
+        if verify_col_type(field_hash) == true
+          db_str = DataUtility.type_mapper(field_hash)
+          @@query_string += query_builder(db_str.keys, db_str.values,                              desc)
+          @@query_string += ", " unless @@query_string == ""
+          get_and_set_property(name)
+        else
+          puts db_error(verify_col_type(field_hash))
+          exit
+        end
+      end
 
-    def self.where()
+      def get_and_set_property(name)
+        define_method(name) do
+         instance_variable_get("@#{name}")
+        end
+        define_method("#{name}=") do |value|
+          instance_variable_set("@#{name}", "#{value}")
+        end
+      end
 
-    end
-
-    def self.limit()
-
-    end
-
-    def self.offset()
-
-    end
-
-    def self.join()
-
-    end
-
-    def self.select()
-
-    end
-
-    def self.unique()
-
-    end
-
-    def self.save
-
-    end
-
-    def self.create
-
-    end
-
-    def self.joined_to
-
-    end
-
-    def self.has_many
-
+      def create(field_hash)
+        attributes = "#{field_hash.keys}".gsub(/:/, "").gsub(/\[|\]/,"")
+        values = "#{field_hash.values}".gsub(/\[|\]/,"").gsub(/\"/,"'")
+        db_conn.execute "INSERT INTO #{table_name} (#{attributes}) VALUES (#{
+          values});"
+      end
     end
   end
 end

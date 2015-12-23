@@ -1,10 +1,4 @@
-require "matrack/version"
-require "matrack/utility"
-require "matrack/dependencies"
-require "matrack/base_model"
-require "matrack/base_controller"
-require "matrack/route"
-require "matrack/router"
+require_relative "resources"
 
 module Matrack
   class Application
@@ -27,7 +21,7 @@ module Matrack
     def response_handler(response, route, env)
       status = 200
       headers = { "Content-Type" => "text/html" }
-      controller = route.get_matclass.new(env)
+      controller = route.matclass.new(env)
       return [status, headers, [response]] if response.is_a? String
       controller.send(route.action)
       response = controller.render(route.action)

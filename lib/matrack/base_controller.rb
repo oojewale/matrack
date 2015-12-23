@@ -13,7 +13,7 @@ module Matrack
       template = Tilt::ERBTemplate.new(File.join("app", "views", "layout",
                                                  "application.html.erb"))
       title = view_name.to_s.tr("_", " ").capitalize
-      view = "#{view_name}.erb"
+      view = "#{view_name}.html.erb"
       view_template = Tilt::ERBTemplate.new(File.join("app", "views",
                                                       controller_name, view))
       template.render(self, title: title) do

@@ -9,26 +9,27 @@ class Router
     instance_eval(&block)
   end
 
-  def get(path, options = {})
-    @routes[:get] << [path, case_parser(options[:to])]
+  def root(root_path)
+    get "/", root_path
   end
 
-  def post(path, options = {})
-    @routes[:post] << [path, case_parser(options[:to])]
-  end
-
-  def put(path, options = {})
-    @routes[:put] << [path, case_parser(options[:to])]
-  end
-
-  def delete(path, options = {})
-    @routes[:delete] << [path, case_parser(options[:to])]
+  %w(get post put delete).each do |request_type|
+    define_method(request_type) do | path, options|
+      request_type = request_type.to_sym
+      if options.is_a? Hash
+        @routes[request_type] << [path, case_parser(options[:to])]
+      else
+        @routes[request_type] << [path, case_parser(options)]
+      end
+    end
   end
 
   def route_for(env)
-    path = env["PATH_INFO"] == "/" ? "/" : env["PATH_INFO"].sub("/", "")
+    path = env["PATH_INFO"]
     verb = env["REQUEST_METHOD"].downcase.to_sym
-    route_array = routes[verb].detect { |route| route.first == path }
+    route_array = routes[verb].detect do |route|
+      route.first == path || route.first == path.sub("/", "")
+    end
     Route.new(route_array) if route_array
   end
 
