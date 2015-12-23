@@ -55,6 +55,8 @@ module Matrack
         row.hash_getter.values.first
       end
 
+      # Save
+
       # .update(1, title: "updated task again", done: "yes")
       def update(id, hash)
         fields = hash.map{|k,v| "'#{k}'" " = "  "'#{v}'"}.join(", ")
