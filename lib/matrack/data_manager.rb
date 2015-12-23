@@ -6,7 +6,7 @@ module Matrack
     class << self
 
       def db_conn
-        db = SQLite3::Database.new "db/app.sqlite3"
+        db = SQLite3::Database.new "#{APP_PATH}/db/app.sqlite3"
         db.results_as_hash = true
         db
       end

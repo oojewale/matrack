@@ -8,3 +8,4 @@
 /spec/reports/
 /tmp/
 doc.txt
+/spec/todo/db/app.sqlite3
