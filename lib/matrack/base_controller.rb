@@ -1,6 +1,8 @@
 module Matrack
   class BaseController
+    include Matrack::HelperTags
     attr_reader :request
+
     def initialize(env)
       @request = Rack::Request.new(env)
     end
@@ -10,8 +12,8 @@ module Matrack
     end
 
     def render(view_name, locals = {})
-      template = Tilt::ERBTemplate.new(File.join(APP_PATH, "app", "views", "layout",
-                                                 "application.html.erb"))
+      template = Tilt::ERBTemplate.new(File.join(APP_PATH, "app", "views",
+                                       "layout", "application.html.erb"))
       title = view_name.to_s.tr("_", " ").capitalize
       view = "#{view_name}.html.erb"
       view_template = Tilt::ERBTemplate.new(File.join(APP_PATH, "app", "views",

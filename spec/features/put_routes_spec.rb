@@ -2,7 +2,6 @@ require_relative "feature_helper"
 
 describe "put routes", type: :feature do
   let(:id) { Task.last.task_id }
-  # let(:id) { Task.last.task_id }
   scenario "update a task" do
 
     visit "/todolist?id=#{id}"
