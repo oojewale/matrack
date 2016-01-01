@@ -1,4 +1,5 @@
 require "sqlite3"
+require "digest/sha1"
 
 module Matrack
   class DataManger
@@ -47,6 +48,10 @@ module Matrack
 
       def valid_col_types?(field_hash)
         field_hash.values.all? { |val| allowed_field_types.include? val.to_s }
+      end
+
+      def password_hash(password)
+        Digest::SHA1.hexdigest(password)
       end
     end
   end
