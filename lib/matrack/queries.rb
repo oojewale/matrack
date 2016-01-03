@@ -36,8 +36,8 @@ module Matrack
       hash = {}
       instance_variables.each do |v|
         var = v.to_s
-        if var == "password"
-          hash[var] = password_hash(instance_variable_get(v))
+        if var == "@password"
+          hash[var] = self.class.password_hash(instance_variable_get(v))
         else
           hash[var] = instance_variable_get(v)
         end

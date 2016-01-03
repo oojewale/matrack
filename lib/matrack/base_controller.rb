@@ -35,5 +35,9 @@ module Matrack
     def controller_name
       self.class.to_s.gsub(/Controller$/, "").to_snake_case
     end
+
+    def authenticate(password)
+      Matrack::DataManger.password_hash(password)
+    end
   end
 end

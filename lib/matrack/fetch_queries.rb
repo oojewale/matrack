@@ -42,9 +42,12 @@ module Matrack
                 LIMIT 1").first
       end
 
-      def find_cols(col, val)
-        execute("SELECT * FROM #{table_name} WHERE (#{col} = '#{val}')
+      # firstname: "name", lastname: "last"
+      def find_cols(col_hash)
+        clause = col_hash.map{|k,v| "#{k.to_s} = " "'#{v}'"}.join(" AND ")
+        execute("SELECT * FROM #{table_name} WHERE (#{clause})
                 LIMIT 1").first
+
       end
 
     end
