@@ -13,6 +13,14 @@ module Matrack
       tag += disabled.nil? ? ">" : " disabled='#{disabled}'>"
     end
 
+    def password_tag(name, class_name = "", holder = "", req = nil,
+                     disabled = nil)
+      tag = "<input type='password' name='#{name}' "
+      tag += "placeholder='#{holder}' class='#{class_name}'"
+      tag += "required='#{req}'" unless req.nil?
+      tag += disabled.nil? ? ">" : " disabled='#{disabled}'>"
+    end
+
     def emailbox_tag(name, value = "", class_name = "", holder = "", req = nil,
                    disabled = nil, pattern = nil)
       tag = "<input type='email' name='#{name}' value='#{value}' "
@@ -32,9 +40,20 @@ module Matrack
       "<a href='#{ref}' class='#{class_name}'>#{title}</a>"
     end
 
-    def image_tag(src, alt = "image")
-      path = File.join(APP_PATH, "app", "assets","images",src)
-      "<img src='#{path}' alt= '#{alt}'>"
+    def image_tag(name, alt = "image")
+      "<img src='../../images/#{name}' alt= '#{alt}'>"
+    end
+
+    def include_stylesheet(name)
+      "<link href='../../css/#{name}.css' rel='stylesheet' type= 'text/css'>"
+    end
+
+    def include_javascript(name)
+      "<script src='../../js/#{name}.js' type='text/javascript'></script>"
+    end
+
+    def display_favicon
+      "<link rel='icon' type='image/png' href='../../images/favicon.png' />"
     end
 
     def form_tag(action, class_name = "")

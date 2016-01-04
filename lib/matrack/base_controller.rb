@@ -2,9 +2,11 @@ module Matrack
   class BaseController
     include Matrack::HelperTags
     attr_reader :request
+    attr_accessor :session
 
     def initialize(env)
       @request = Rack::Request.new(env)
+      @session = Session.new(env)
     end
 
     def params
@@ -21,6 +23,12 @@ module Matrack
       template.render(self, title: title) do
         view_template.render(self, locals.merge!(get_instance_vars))
       end
+    end
+
+    def invalid_route
+      template = Tilt::ERBTemplate.new(File.join(APP_PATH, "app", "views",
+                                                 "layout", "invalid.html.erb"))
+      template.render(self)
     end
 
     def get_instance_vars
