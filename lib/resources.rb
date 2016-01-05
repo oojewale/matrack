@@ -1,3 +1,6 @@
+require "rack"
+require "rack/handler/puma"
+require "thor"
 require "matrack/version"
 require "matrack/utility"
 require "matrack/dependencies"

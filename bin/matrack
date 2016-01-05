@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
-require "rack"
+
 require "bundler/setup"
 require "matrack"
 
-Rack::Handler::Puma.run Matrack::Application.new, Port: 3001
+Matrack::Application.start
+# Rack::Handler::Puma.run Matrack::Application.new, Port: 3001
