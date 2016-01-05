@@ -11,7 +11,6 @@ end
 
 required_paths.each { |path| $LOAD_PATH << path }
 Dir["app/models/*.rb"].each { |model| require model.split("/").last }
-module Todo
-  class Application < Matrack::Application
-  end
+
+class Application < Matrack::Application
 end
