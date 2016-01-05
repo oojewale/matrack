@@ -1,18 +1,20 @@
-# MatScheduler
+# My New App
 
-#Introduction
+Welcome to your new application built with matrack framework.
 
-Hi, I'm making a simple TODO app(scheduler). More information soon.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Thank you.
+Things you may want to cover:
 
+* Ruby version
 
-## Contributing
+* System dependencies
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/andela-oojewale/matscheduler.
+* Configuration
 
-* Fork it ( https://github.com/andela-oojewale/matscheduler/fork)
-* Create your feature branch (git checkout -b my-new-feature)
-* Commit your changes (git commit -am 'Add some feature')
-* Push to the branch (git push origin my-new-feature)
-* Create a new Pull Request
+* Database creation
+
+* Database initialization
+
+* How to run the test suite

@@ -1,3 +1,3 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem "matrack", path: "../matrack"
+gem "matrack", "0.1.0"

@@ -2,7 +2,10 @@ require "rack"
 require "rack/handler/puma"
 require "thor"
 require "matrack/version"
-require_relative File.join(__dir__, "..", "generators", "generator")
+Dir["../generators/*.rb"].each { |gen_file| require gen_file }
+# require_relative File.join(__dir__, "..", "generators", "generator")
+# require_relative File.join(__dir__, "..", "generators", "mvc_gen")
+# require_relative File.join(__dir__, "..", "generators", "generator_base")
 require "matrack/utility"
 require "matrack/dependencies"
 require "orm/data_utility"
