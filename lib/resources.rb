@@ -2,6 +2,7 @@ require "rack"
 require "rack/handler/puma"
 require "thor"
 require "matrack/version"
+require_relative File.join(__dir__, "..", "generators", "generator")
 require "matrack/utility"
 require "matrack/dependencies"
 require "matrack/data_utility"

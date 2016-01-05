@@ -1,11 +1,7 @@
 require_relative "resources"
 
 module Matrack
-  class Application < Thor::Group
-    include Thor::Actions
-
-    argument :name
-    class_option :test_framework, default: :rspec
+  class Application
 
     attr_reader :router
 
@@ -57,14 +53,6 @@ module Matrack
       controller.send(route.action)
       response = controller.render(route.action)
       [status, headers, [response]]
-    end
-
-    def self.source_root
-      File.dirname(__FILE__)
-    end
-
-    def create_directories
-      empty_directory "app"
     end
   end
 end
