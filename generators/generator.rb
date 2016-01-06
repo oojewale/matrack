@@ -3,6 +3,7 @@ module Matrack
     include Thor::Actions
 
     attr_reader :app_name
+
     class_option :test_framework, default: :rspec
 
     def self.source_root
