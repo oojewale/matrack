@@ -33,6 +33,13 @@ module Matrack
     def create_model(args)
       create_file "./app/models/#{name}.rb" do
         data = "class #{name.to_camel_case} < ActiveManager"
+        if len > 2
+          args[2..-1].each do |prop|
+            name = prop.split(":").first.to_sym
+            type = prop.split(":").last.to_sym
+            data += "\n property #{name}, #{type} \n end"
+          end
+        end
         data += "\n create_table \nend"
       end
     end
