@@ -19,6 +19,11 @@ class ::String
   def titleize
     split.map!(&:capitalize).join(" ")
   end
+
+  def pluralize
+    self + "s" unless self.end_with? "s"
+  end
+
 end
 
 class ::Array

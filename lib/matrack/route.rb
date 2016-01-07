@@ -1,5 +1,5 @@
 class Route
-  attr_reader :matclass, :action
+  attr_reader :matclass, :action, :mat_controller
 
   def initialize(route_array)
     str_matclass = route_array.last[:matclass].to_camel_case
@@ -9,6 +9,7 @@ class Route
   end
 
   def execute(env)
-    matclass.new(env).send(action)
+    @mat_controller = matclass.new(env)
+    @mat_controller.send(action)
   end
 end

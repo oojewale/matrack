@@ -15,7 +15,7 @@ module Matrack
     def new(app_name)
       @app_name = app_name
       empty_directory "#{app_name}"
-      create_mvc_dir(["assets", "controllers", "models", "views"])
+      create_mvc_dir(["assets", "controllers", "helpers", "models", "views"])
       create_dir(["config", "db"])
       files = ["config.ru", "Gemfile", "README.md"]
       copy_basic_files(files)
@@ -36,6 +36,8 @@ module Matrack
           files = ["application.html.erb", "invalid.html.erb"]
           path = "app/views/layout"
           copy_basic_files(files, path)
+        elsif name == "controllers"
+          copy_basic_files("application_controller.rb", "app/#{name}")
         end
       end
     end

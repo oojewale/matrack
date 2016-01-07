@@ -1,3 +1,5 @@
+# require "open-uri"
+
 module Matrack
   class BaseController
     include Matrack::HelperTags
@@ -13,7 +15,19 @@ module Matrack
       request.params
     end
 
-    def render(view_name, locals = {})
+    def create_response(body, status = 200, headers = {})
+      @response = Rack::Response.new body, status, headers
+    end
+
+    def response
+      @response
+    end
+
+    def render(*args)
+      create_response(render_template(*args))
+    end
+
+    def render_template(view_name, locals = {})
       template = Tilt::ERBTemplate.new(File.join(APP_PATH, "app", "views",
                                        "layout", "application.html.erb"))
       title = view_name.to_s.tr("_", " ").capitalize
@@ -46,6 +60,10 @@ module Matrack
 
     def authenticate(password)
       Matrack::DataManger.password_hash(password)
+    end
+
+    def redirect_to(address)
+      create_response([], 302, "location" => address)
     end
   end
 end
