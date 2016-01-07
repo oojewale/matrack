@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col m7 offset-m2 left">
+     <%= link_tag "/user/logout", "btn danger right", "Logout" %>
+    <h5>Saved Tasks</h5>
+      <% if @msg %>
+        <p><%= @msg %></p>
+        <li><%= link_tag "tasks", "btn left", "View Tasks" %></li>
+        <p>&nbsp;</p>
+      <% end %>
+      <% if @task %>
+        <table class="bordered highlight">
+          <thead>
+            <tr>
+              <td>S/N</td>
+              <td>Title</td>
+              <td>Date/Time</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% counter = 1%>
+            <% @task.each do |t| %>
+              <tr>
+                <td><%= counter %></td>
+                <td><%= t.title %></td>
+                <td><%= t.start %></td>
+                <td>
+                    <a href="/todolist?id=<%= t.task_id %>" class="btn right">Edit</a>
+                </td>
+                <td>
+                  <form action="/todolist" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <%= submit_tag "delete_task", "Delete", "btn" %>
+                    <input name="task_id" type="hidden" value="<%=t.task_id%>">
+                  </form>
+                </td>
+              </tr>
+              <% counter += 1%>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <p>&nbsp;</p>
+    <li><%= link_tag "/todolist/new", "btn left", "Create Tasks" %></li>
+  </div>
+
+</div>

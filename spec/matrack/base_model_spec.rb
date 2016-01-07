@@ -1,14 +1,13 @@
 require "spec_helper"
-describe Matrack::BaseModel do
+describe "base_model" do
 
-  before(:all) do
-    @model = Matrack::BaseModel
-  end
+  let(:model){ Matrack::BaseModel }
 
   describe "#property" do
     it "exits unsupported column types are used " do
-      allow(@model).to receive(:puts).and_return("DB ERROR")
-      expect(@model.property("age", "float")).to raise_error SystemExit
+      allow(model).to receive(:puts).and_return("DB ERROR")
+      allow(model).to receive(:exit).and_return("Exiting")
+      expect(model.property("age", "float")).to eq "Exiting"
     end
   end
 end

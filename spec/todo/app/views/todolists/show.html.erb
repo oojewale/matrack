@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col m7 offset-m2 left">
+     <%= link_tag "/user/logout", "btn danger right", "Logout" %>
+    <h5>Saved Task</h5>
+    <% if @msg %>
+      <p><strong> <%= @msg %> </strong></p>
+    <% elsif @task  %>
+      <table class="bordered highlight">
+        <thead>
+          <tr>
+            <td>S/N</td>
+            <td>Title</td>
+            <td>Date/Time</td>
+            <td>Done</td>
+          </tr>
+        </thead>
+        <tbody>
+          <form action="/todolist" method="post">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="id" value="<%=params['id']%>">
+            <tr>
+              <td><span>1</span></td>
+              <td><%= textbox_tag("title", "#{ @task.title }")%></td>
+              <td><%= textbox_tag("start", "#{ @task.start }")%></td>
+              <td><% if @task.done.downcase == "yes" %>
+                <input type="checkbox" name="done" checked="checked" disabled="true">
+                <% else %>
+                  <input type="checkbox" name="done">
+                <% end %>
+              </td>
+              <td><%= submit_tag "update", "Update", "btn" %></td>
+            </tr>
+          </form>
+        </tbody>
+      </table>
+    <% else %>
+      <p><strong>Invalid ID specified</strong></p>
+    <% end %>
+      <p>&nbsp;</p>
+    <li><%= link_tag "/todolist/new", "btn left", "Create Tasks" %></li>
+  </div>
+
+</div>

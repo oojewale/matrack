@@ -25,7 +25,7 @@ module Matrack
                    disabled = nil, pattern = nil)
       tag = "<input type='email' name='#{name}' value='#{value}' "
       tag += "placeholder='#{holder}' class='#{class_name}'"
-      tag += "required='#{req}'" unless required.nil?
+      tag += "required='#{req}'" unless req.nil?
       regex_pattern = pattern.nil? ? "#{email_validator}" : "#{pattern}"
       tag += " pattern='#{regex_pattern}'"
       tag += disabled.nil? ? ">" : " disabled='#{disabled}'>"
