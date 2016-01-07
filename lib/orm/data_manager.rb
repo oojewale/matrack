@@ -2,7 +2,7 @@ require "sqlite3"
 require "digest/sha1"
 
 module Matrack
-  class DataManger
+  class DataManager
     class << self
       def db_conn
         db = SQLite3::Database.new "#{APP_PATH}/db/app.sqlite3"

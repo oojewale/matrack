@@ -1,5 +1,5 @@
 module Matrack
-  class FetchQueries < DataManger
+  class FetchQueries < DataManager
     class << self
       def table_name
         self.to_s.to_snake_case + "s"
