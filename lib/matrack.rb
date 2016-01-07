@@ -11,21 +11,22 @@ module Matrack
     def call(env)
       route = router.route_for(env)
       if route
-        response = route.execute(env)
-        return response_handler(response, route, env)
+        route.execute(env)
+        response_handler(route)
       else
-        [404, {}, ["Invalid route specified"]]
+        controller = BaseController.new(env)
+        body = controller.invalid_route
+        [404, {}, [body]]
       end
     end
 
-    def response_handler(response, route, env)
-      status = 200
-      headers = { "Content-Type" => "text/html" }
-      controller = route.matclass.new(env)
-      return [status, headers, [response]] if response.is_a? String
-      controller.send(route.action)
-      response = controller.render(route.action)
-      [status, headers, [response]]
+    def response_handler(route)
+      controller = route.mat_controller
+      if controller.response
+        controller.response
+      else
+        controller.render(route.action)
+      end
     end
   end
 end

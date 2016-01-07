@@ -1,6 +1,5 @@
 class DataUtility
   class << self
-
     def type_mapper(field_hash)
       db_data = {}
       field_hash.each_pair do |k, v|

@@ -1,6 +1,5 @@
 module Matrack
   class BaseModel < Queries
-
     def initialize(hash = {})
       hash.each_pair { |k,v| send("#{k}=", v) }
       self
@@ -39,10 +38,19 @@ module Matrack
       end
 
       def create(field_hash)
+        passwordify(field_hash)
         attributes = "#{field_hash.keys}".gsub(/:/, "").gsub(/\[|\]/,"")
         values = "#{field_hash.values}".gsub(/\[|\]/,"").gsub(/\"/,"'")
         db_conn.execute "INSERT INTO #{table_name} (#{attributes}) VALUES (#{
           values});"
+      end
+
+      def passwordify(field_hash)
+        if field_hash.keys.include? :password
+          hashed_pass = password_hash(field_hash[:password])
+          field_hash[:password] = hashed_pass
+        end
+        field_hash
       end
     end
   end
