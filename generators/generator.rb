@@ -11,7 +11,6 @@ module Matrack
     end
 
     desc "new app_name", "creates new project with app_name as the app name"
-    # The new method is actually like the initializer of this class.
     def new(app_name)
       @app_name = app_name
       empty_directory "#{app_name}"
@@ -75,6 +74,5 @@ module Matrack
         copy_file "generate/#{name}", "#{dir_path}/#{name}"
       end
     end
-
   end
 end

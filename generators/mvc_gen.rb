@@ -1,6 +1,5 @@
 module Matrack
   class MvcGen < Generator
-
     attr_reader :name, :len
 
     desc "method[g]", "generates new controllers, models and views"

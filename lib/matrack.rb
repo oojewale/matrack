@@ -2,7 +2,6 @@ require_relative "resources"
 
 module Matrack
   class Application
-
     attr_reader :router
 
     def initialize

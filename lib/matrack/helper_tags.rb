@@ -55,18 +55,5 @@ module Matrack
     def display_favicon
       "<link rel='icon' type='image/png' href='../../images/favicon.png' />"
     end
-
-    def form_tag(action, class_name = "")
-      # Not working yet
-      if block_given?
-        form = "<form action='#{action}' method='post' class='#{class_name}'>"
-          # require "pry"; binding.pry
-        fields = yield
-        form +="<br/>#{fields}<br/></form>"
-      else
-        "Form_tag requires a block"
-      end
-    end
-
   end
 end

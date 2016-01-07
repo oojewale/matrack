@@ -1,5 +1,3 @@
-# require "open-uri"
-
 module Matrack
   class BaseController
     include Matrack::HelperTags

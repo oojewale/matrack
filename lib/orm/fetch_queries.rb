@@ -49,7 +49,6 @@ module Matrack
                 LIMIT 1").first
 
       end
-
     end
   end
 end

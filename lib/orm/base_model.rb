@@ -1,6 +1,5 @@
 module Matrack
   class BaseModel < Queries
-
     def initialize(hash = {})
       hash.each_pair { |k,v| send("#{k}=", v) }
       self
