@@ -1,5 +1,5 @@
 require "spec_helper"
-desctribe "utility" do
+describe "utility" do
   let(:str) { "InternetOfThings" }
   let(:bool_val) { "true" }
 # before :all  do

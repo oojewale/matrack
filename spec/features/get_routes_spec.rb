@@ -8,6 +8,11 @@ describe "get routes", type: :feature do
     expect(page).to have_title "Index"
   end
 
+  scenario "visit todolist index page" do
+    visit "/tasks"
+    expect(page).to have_content "Finish Scheduler app"
+  end
+
   scenario "visit page of a specific task" do
     visit "/todolist?id=#{id}"
     expect(page).to have_field("title", with: "Finish Scheduler app")
@@ -26,6 +31,11 @@ describe "get routes", type: :feature do
 
   scenario "visit page for new task" do
     visit "#{invalid_route}"
-    expect(page).to have_content("Invalid route specified")
+    expect(page).to have_content("Since we could not find the page you want to visit")
+  end
+
+  scenario "logs out" do
+    visit "user/logout"
+    expect(page).to have_content "Login"
   end
 end
