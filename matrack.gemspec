@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "A ruby MVC framework."
   spec.description   = "A ruby MVC framework implented using rack."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/andela-oojewale/matrack/blob/master/matrack-0.1.0.gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -29,15 +29,15 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "capybara"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "codeclimate-test-reporter"
-  spec.add_runtime_dependency "rspec"
-  spec.add_runtime_dependency "pry"
-  spec.add_runtime_dependency "pry-nav"
-  spec.add_runtime_dependency "puma"
-  spec.add_runtime_dependency "rack"
-  spec.add_runtime_dependency "tilt"
-  spec.add_runtime_dependency "sqlite3"
-  spec.add_runtime_dependency "thor"
+  spec.add_development_dependency "capybara", "2.5.0"
+  spec.add_development_dependency "simplecov", "0.10.0"
+  spec.add_development_dependency "codeclimate-test-reporter", "0.4.8"
+  spec.add_runtime_dependency "rspec", "3.4.0"
+  spec.add_runtime_dependency "pry", "0.10.3"
+  spec.add_runtime_dependency "pry-nav", "0.2.4"
+  spec.add_runtime_dependency "puma", "2.15.3"
+  spec.add_runtime_dependency "rack", "1.6.4"
+  spec.add_runtime_dependency "tilt", "2.0.1"
+  spec.add_runtime_dependency "sqlite3", "1.3.11"
+  spec.add_runtime_dependency "thor", "0.19.1"
 end

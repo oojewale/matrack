@@ -1,0 +1,15 @@
+<div class= "row">
+  <div class="col m7 offset-m2 left">
+    <%= link_tag "/user/logout", "btn danger right", "Logout" %>
+    <h5>New Task</h5>
+    <form action="/todolist" method= "post">
+      <p><%= @msg if @msg %></p>
+      <ul>
+        <li>Title:<%= textbox_tag "title" %></li>
+        <li>Event Date & Time: <%= textbox_tag "start" %></li>
+        <li><%= submit_tag "add_task", "Add Task", "btn left" %></li>
+        <li><%= link_tag "/tasks", "btn right", "View Tasks" %></li>
+      </ul>
+    </form>
+  </div>
+</div>

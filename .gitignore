@@ -9,4 +9,3 @@
 /tmp/
 /lib/orm/relationship_manager.rb
 doc.txt
-/spec/todo/db/app.sqlite3

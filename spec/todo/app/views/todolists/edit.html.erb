@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col m7 offset-m2 left">
+     <%= link_tag "/user/logout", "btn danger right", "Logout" %>
+    <h5>Saved Tasks</h5>
+      <table class="bordered highlight">
+        <thead>
+          <tr>
+            <td>S/N</td>
+            <td>Title</td>
+            <td>Date/Time</td>
+            <td>Done</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% counter = 1%>
+          <% @task.each do |t| %>
+            <tr>
+              <td><%= counter %></td>
+              <td><%= t.title %></td>
+              <td><%= t.start %></td>
+              <td><input type="checkbox" name="done"></td>
+              <td><%= link_tag "/todolist?<%=t.task_id%>", "btn", "Delete" %></td>
+            </tr>
+            <% counter += 1%>
+          <% end %>
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+    <li><%= link_tag "/todolist/new", "btn left", "Create Tasks" %></li>
+  </div>
+
+</div>

@@ -57,7 +57,7 @@ module Matrack
     end
 
     def authenticate(password)
-      Matrack::DataManger.password_hash(password)
+      Matrack::DataManager.password_hash(password)
     end
 
     def redirect_to(address)

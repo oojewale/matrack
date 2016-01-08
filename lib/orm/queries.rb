@@ -19,7 +19,6 @@ module Matrack
         fields = hash.map{|k,v| "'#{k}'" " = "  "'#{v}'"}.join(", ")
         qry = "UPDATE #{table_name} SET #{fields} WHERE (#{uniq_id} = #{id})"
         return "Record updated" if db_conn.execute qry
-        "Operation not successful"
       end
     end
 

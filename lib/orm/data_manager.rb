@@ -2,7 +2,7 @@ require "sqlite3"
 require "digest/sha1"
 
 module Matrack
-  class DataManger
+  class DataManager
     class << self
       def db_conn
         db = SQLite3::Database.new "#{APP_PATH}/db/app.sqlite3"
@@ -33,8 +33,8 @@ module Matrack
       def create_table_fields(table_name, qry_str)
         begin
           db_conn.execute "CREATE TABLE IF NOT EXISTS #{table_name} (#{qry_str});"
-        rescue SQLite3::Exception => exp
-          puts self.db_error(exp)
+        rescue
+          puts db_error("Can not create table")
           exit
         end
       end

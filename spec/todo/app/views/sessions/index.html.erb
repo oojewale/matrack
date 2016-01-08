@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col m8 offset-m2">
+    <% if @msg %>
+      <p><%= @msg %></p>
+    <% end %>
+    <div class="col m5 left">
+      <h5>Login</h5>
+      <form action="/user/login" method= "post">
+      <ul>
+        <li>Email: <%= emailbox_tag "user_email" %></li>
+        <li>Password: <%= password_tag "user_password" %></li>
+        <li><%= submit_tag "loginbtn", "Login", "btn" %></li>
+      </ul>
+      </form>
+    </div>
+
+    <div class="col m6 right">
+      <h5>New Here? Register</h5>
+      <form action="/user/create" method= "post">
+      <ul>
+        <li>First Name: <%= textbox_tag "firstname" %></li>
+        <li>Last Name: <%= textbox_tag "lastname" %></li>
+        <li>Email: <%= emailbox_tag "email" %></li>
+        <li>Password: <%= password_tag "password" %></li>
+        <li>Confirm Password: <%= password_tag "confpswd" %></li>
+        <li><%= submit_tag "regbtn", "Register", "btn" %></li>
+      </ul>
+      </form>
+    </div>
+  </div>
+</div>

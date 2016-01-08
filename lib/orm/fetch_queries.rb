@@ -1,5 +1,5 @@
 module Matrack
-  class FetchQueries < DataManger
+  class FetchQueries < DataManager
     class << self
       def table_name
         self.to_s.to_snake_case + "s"
@@ -30,7 +30,7 @@ module Matrack
       end
 
       def limit(num)
-        execute("SELECT * FROM #{table_name} LIMIT(#{num})").first
+        execute "SELECT * FROM #{table_name} LIMIT(#{num})"
       end
 
       def first

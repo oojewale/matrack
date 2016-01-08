@@ -1,0 +1,39 @@
+body {
+  background-color: #fff;
+  color: #3DA1C8;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 auto !important;
+  color: #14548C;
+}
+
+.btn.danger {
+  background-color: #ef5350 !important;
+}
+
+.btn {
+  background-color: #14548C !important;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  position: relative;
+  left: 0;
+  margin: auto 1em;
+  visibility: visible;
+}
+
+.not-found p {
+  /*margin-left: 4em !important;*/
+  font-weight: bold;
+}
+
+.not-found img {
+  width: 50em;
+  height: 30em;
+}
+
+.logo img {
+  height: 6.5em;
+  width: 6.5em;
+  float: left;
+}
