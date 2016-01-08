@@ -2,7 +2,7 @@ module Matrack
   class MvcGen < Generator
     attr_reader :name, :len
 
-    desc "method[g]", "generates new controllers, models and views"
+    desc "method[g]", "generates new controllers, models and views. Alias 'generate'"
     def g(*args)
       @name = args[0] == "controller" ? args[1].pluralize : args[1]
       @len = args.length

@@ -28,7 +28,7 @@ class Router
     path = env["PATH_INFO"]
     verb = env["REQUEST_METHOD"].downcase.to_sym
     route_info = routes[verb].detect do |route|
-      route.first == (path =~ /^[\/]+[\w]/ ? path.sub("/", "") : path)
+      route.first == path || route.first == path.sub("/", "")
     end
     Route.new(route_info) if route_info
   end
