@@ -27,10 +27,10 @@ class Router
   def route_for(env)
     path = env["PATH_INFO"]
     verb = env["REQUEST_METHOD"].downcase.to_sym
-    route_array = routes[verb].detect do |route|
-      route.first == path || route.first == path.sub("/", "")
+    route_info = routes[verb].detect do |route|
+      route.first == (path =~ /^[\/]+[\w]/ ? path.sub("/", "") : path)
     end
-    Route.new(route_array) if route_array
+    Route.new(route_info) if route_info
   end
 
   private

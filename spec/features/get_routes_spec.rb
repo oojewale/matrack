@@ -16,13 +16,16 @@ describe "get routes", type: :feature do
   end
 
   scenario "visit page of a specific task" do
-    visit "/todolist?id=#{id}"
+    page.driver.get "/todolist",  { id: id }
+    # visit "/todolist?id=#{id}"
+      require "pry"; binding.pry
     expect(page).to have_field("title", with: "Finish Scheduler app")
   end
 
   scenario "visit page of a specific task" do
     invalid_id = id.to_i + 5
-    visit "/todolist?id=#{invalid_id}"
+    page.driver.get "/todolist",  { id: invalid_id }
+    # visit "/todolist?id=#{invalid_id}"
     expect(page).to have_selector("p", text: "Invalid ID specified")
   end
 

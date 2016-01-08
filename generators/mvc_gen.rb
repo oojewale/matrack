@@ -41,7 +41,7 @@ module Matrack
     desc "method[create_model]", "creates new models"
     def create_model(args)
       create_file "./app/models/#{name}.rb" do
-        data = "class #{name.to_camel_case} < ActiveManager"
+        data = "class #{name.to_camel_case} < Matrack::BaseModel"
         if len > 2
           args[2..-1].each do |prop|
             name, type = prop.split(":")

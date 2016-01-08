@@ -60,7 +60,7 @@ module Matrack
     def create_dir(directories = [])
       directories.each do |name|
         empty_directory "#{app_name}/#{name}"
-        files = ["active_manager.rb", "application.rb", "routes.rb"]
+        files = ["application.rb", "routes.rb"]
         copy_basic_files(files, "#{name}") if name == "config"
       end
     end

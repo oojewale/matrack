@@ -5,6 +5,7 @@ module Matrack
       self
     end
 
+    # db_conn
     @@query_string = ""
 
     class << self

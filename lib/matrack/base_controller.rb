@@ -1,7 +1,7 @@
 module Matrack
   class BaseController
     include Matrack::HelperTags
-    attr_reader :request
+    attr_reader :request, :response
     attr_accessor :session
 
     def initialize(env)
@@ -15,10 +15,6 @@ module Matrack
 
     def create_response(body, status = 200, headers = {})
       @response = Rack::Response.new body, status, headers
-    end
-
-    def response
-      @response
     end
 
     def render(*args)
