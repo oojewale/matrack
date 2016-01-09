@@ -3,7 +3,12 @@ require "digest/sha1"
 
 module Matrack
   class DataManager
+
     class << self
+      # def inherited(sub_class)
+      #   db_conn
+      # end
+
       def db_conn
         db = SQLite3::Database.new "#{APP_PATH}/db/app.sqlite3"
         db.results_as_hash = true

@@ -10,7 +10,7 @@ module Matrack
       File.dirname(__FILE__)
     end
 
-    desc "new app_name", "creates new project with app_name as the app name"
+    desc "new [app_name]", "creates new project with app_name as the app name"
     def new(app_name)
       @app_name = app_name
       empty_directory "#{app_name}"
@@ -20,12 +20,12 @@ module Matrack
       copy_basic_files(files)
     end
 
-    desc "method[create_a_file]", "creates new file"
+    desc "create_a_file[args]", "creates new file"
     def create_a_file(name, path)
       create_file "#{path}/#{name}"
     end
 
-    desc "method[create_mvc_dir]", "creates app dir with mvc folders"
+    desc "create_mvc_dir[args]", "creates app dir with mvc folders"
     def create_mvc_dir(directories = [])
       directories.each do |name|
         empty_directory "#{app_name}/app/#{name}"
@@ -41,7 +41,7 @@ module Matrack
       end
     end
 
-    desc "method[create_asset_dirs]", "creates asset subfolders"
+    desc "create_asset_dirs", "creates asset subfolders"
     def create_asset_dirs
       directories = ["css", "images", "js"]
       directories.each do |name|
@@ -51,21 +51,21 @@ module Matrack
       end
     end
 
-    desc "method[create_view_layout]", "creates view layout folder"
+    desc "create_view_layout", "creates view layout folder"
     def create_view_layout
       empty_directory "#{app_name}/app/views/layout"
     end
 
-    desc "method[create_dir]", "creates directories in the app root"
+    desc "create_dir[args]", "creates directories in the app root"
     def create_dir(directories = [])
       directories.each do |name|
         empty_directory "#{app_name}/#{name}"
-        files = ["active_manager.rb", "application.rb", "routes.rb"]
+        files = ["application.rb", "routes.rb"]
         copy_basic_files(files, "#{name}") if name == "config"
       end
     end
 
-    desc "method[copy_basic_files]", "creates basic setup files"
+    desc "copy_basic_files[args]", "creates basic setup files"
     def copy_basic_files(name, path = nil)
       dir_path = path.nil? ? "#{app_name}" : "#{app_name}/#{path}"
       if name.is_a? Array

@@ -15,4 +15,5 @@ Dir["app/helpers/*.rb"].each { |helper| require helper.split("/").last }
 Dir["app/models/*.rb"].each { |model| require model.split("/").last }
 
 class Application < Matrack::Application
+  Matrack::BaseModel.db_conn
 end

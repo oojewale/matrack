@@ -17,7 +17,7 @@ module Matrack
       end
 
       def all
-        rows = execute "SELECT * FROM #{table_name}"
+        execute "SELECT * FROM #{table_name}"
       end
 
       def find(id)
@@ -47,7 +47,6 @@ module Matrack
         clause = col_hash.map{|k,v| "#{k.to_s} = " "'#{v}'"}.join(" AND ")
         execute("SELECT * FROM #{table_name} WHERE (#{clause})
                 LIMIT 1").first
-
       end
     end
   end

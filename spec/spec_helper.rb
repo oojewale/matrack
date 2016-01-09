@@ -16,6 +16,5 @@ SimpleCov.start do
     CodeClimate::TestReporter::Formatter
   ]
 end
-require "matrack"
 require_relative "todo/test_helper.rb"
 require "rspec"
