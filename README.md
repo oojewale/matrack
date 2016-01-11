@@ -36,6 +36,7 @@ Or install it yourself as:
   * ORM
   * Use of sessions
   * Testing
+  * Custom model properties types e.g int, str, time and date.
   * Starting server with the "s" or "server" keyword.
 
 ## Limitations
@@ -47,23 +48,7 @@ Or install it yourself as:
 
 ## Usage
 
-To create a matrack application run:
-
-  `matrack new your_app_name`
-
-This generates certain directories and files that are essential to the creation  of your new app such as:
-  * assets: This contains all asset folders. More information can be found in [asset documentation](link to assets file).
-  * controllers: This will contain all controllers. It has a default application contoller from which all contollers inherit. This file may not be renamed.
-  * helpers: This will contain all helpers.
-  * models: This will contain all models.
-  * views: This will contain all views in folder that have the same name as their respective controllers.
-
-  Also contains a layout folder that contains two files, viz:
-   * application.html.erb - The base layout for all views.
-   * invalid.html.erb - It is displayed when a user visits a non-existing route.
-
-  NB: The content of the body tag of these two files may be edited but the files may not be deleted.
-  More information can be found in [generators documentation](link to assets file).
+Usage information can be found [here](https://github.com/andela-oojewale/matrack/wiki/Matrack).
 
 ## Development
 
