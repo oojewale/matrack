@@ -1,17 +1,22 @@
 # Matrack
 
-#Introduction
+## Introduction
 
-Hi, I'm making a ruby MVC framework with rack. More information soon.
+Matrack is a MVC ruby mini-framework, that is modelled after rails. Matrack takes majority of its inspiration from rails but it is not by any means as complex or robust as rails.
 
-Thank you.
+However, matrack is a good fit for simple applications. It makes available some of the great features of rails.
+
+
+## Version
+
+This is version 0.1.0 of matrack gem.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'matrack'
+gem "matrack", "0.1.0"
 ```
 
 And then execute:
@@ -22,9 +27,43 @@ Or install it yourself as:
 
     $ gem install matrack
 
+
+## Features
+  * Auto genration of necessary directories and files.
+  * Helpers.
+  * Generation of controllers and corresponding views from commandline line.
+  * Generation of models from commandline line.
+  * ORM
+  * Use of sessions
+  * Testing
+  * Starting server with the "s" or "server" keyword.
+
+## Limitations
+  This version of the gem does not
+  * support model relationships.
+  * implement callbacks.
+  * support migration generation.
+  * generate a schema.
+
 ## Usage
 
-TODO: Write usage instructions here
+To create a matrack application run:
+
+  `matrack new your_app_name`
+
+This generates certain directories and files that are essential to the creation  of your new app such as:
+  * assets: This contains all asset folders. More information can be found in [asset documentation](link to assets file).
+  * controllers: This will contain all controllers. It has a default application contoller from which all contollers inherit. This file may not be renamed.
+  * helpers: This will contain all helpers.
+  * models: This will contain all models.
+  * views: This will contain all views in folder that have the same name as their respective controllers.
+
+  Also contains a layout folder that contains two files, viz:
+   * application.html.erb - The base layout for all views.
+   * invalid.html.erb - It is displayed when a user visits a non-existing route.
+
+  NB: The content of the body tag of these two files may be edited but the files may not be deleted.
+  More information can be found in [generators documentation](link to assets file).
 
 ## Development
 
