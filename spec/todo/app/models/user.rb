@@ -1,4 +1,4 @@
-class User < ActiveManager
+class User < Matrack::BaseModel
   property :user_id, :int, primary_key: true
   property :firstname, :str, nullable: false
   property :lastname, :str
