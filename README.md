@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Matrack is a MVC ruby mini-framework, that is modelled after rails. Matrack takes majority of its inspiration from rails but it is not by any means as complex or robust as rails.
+Matrack is a MVC ruby mini-framework, that is modeled after rails. Matrack takes majority of its inspiration from rails but it is not by any means as complex or robust as rails.
 
 However, matrack is a good fit for simple applications. It makes available some of the great features of rails.
 
@@ -26,11 +26,11 @@ run the following command in your terminal:
 ## Features
   * Auto genration of necessary directories and files.
   * Helpers.
-  * Generation of controllers and corresponding views from commandline line.
+  * Generation of controllers and corresponding views from commandline.
   * Generation of models from commandline line.
   * ORM
   * Use of sessions
-  * Testing
+  * Supports Testing.
   * Custom model properties types e.g int, str, time and date.
   * Starting server with the "s" or "server" keyword.
 
@@ -45,6 +45,13 @@ run the following command in your terminal:
 ## Usage
 
 Usage information can be found [here](https://github.com/andela-oojewale/matrack/wiki).
+
+## Sample App
+
+  [This](https://github.com/andela-oojewale/matscheduler) app was developed with matrack.
+
+  Feel free to check the source code or clone the repo and run it on your local machine.
+
 
 ## Contributing
 
