@@ -2,8 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/andela-oojewale/matrack/badges/gpa.svg)](https://codeclimate.com/github/andela-oojewale/matrack)
 
-
-
+[![Coverage Status](https://coveralls.io/repos/andela-oojewale/matrack/badge.svg?branch=feature%2Fspec&service=github)](https://coveralls.io/github/andela-oojewale/matrack?branch=feature%2Fspec)
 
 ## Introduction
 
