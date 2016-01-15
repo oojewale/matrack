@@ -2,7 +2,8 @@ require_relative "feature_helper"
 
 describe "post routes", type: :feature do
   before(:all) do
-    User.create(firstname: "Olaide", lastname: "Ojewale", email: "olaide@mail.co", password: "feature_test")
+    User.create(firstname: "Olaide", lastname: "Ojewale",
+                email: "olaide@mail.co", password: "feature_test")
   end
   after(:all) { User.destroy_all }
 
