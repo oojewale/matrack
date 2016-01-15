@@ -8,14 +8,16 @@ def paths
 end
 paths.each { |path| $LOAD_PATH << path }
 
-require "simplecov"
-require "codeclimate-test-reporter"
-SimpleCov.start do
-  formatter SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    CodeClimate::TestReporter::Formatter
-  ]
-end
+require 'coveralls'
+Coveralls.wear!
+# require "simplecov"
+# require "codeclimate-test-reporter"
+# SimpleCov.start do
+#   formatter SimpleCov::Formatter::MultiFormatter[
+#     SimpleCov::Formatter::HTMLFormatter,
+#     CodeClimate::TestReporter::Formatter
+#   ]
+# end
 require "matrack"
 require_relative "todo/test_helper.rb"
 require "rspec"
