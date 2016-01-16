@@ -11,7 +11,6 @@ paths.each { |path| $LOAD_PATH << path }
 
 require "coveralls"
 Coveralls.wear!
-require "simplecov"
 require "matrack"
 require_relative "todo/test_helper.rb"
 require "rspec"
